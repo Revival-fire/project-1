@@ -102,8 +102,36 @@ Create an index.html file in that location so that we can test that the virtual 
 sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
 ```
 
+![display after replacing the landing page with index.html page](./images/LAMP.PNG)
+
+![php successfully installed](./images/php_installed.PNG)
+
+
 STEP 5 — ENABLE PHP ON THE WEBSITE
 
+
+`sudo vim /etc/apache2/mods-enabled/dir.conf`
+
+```
+<IfModule mod_dir.c>
+        #Change this:
+        #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+        #To this:
+        DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
+```
+Then reload apache  `sudo systemctl reload apache2`
+
+Create a new file named index.php inside your custom web root folder:
+
+`vim /var/www/projectlamp/index.php`
+
+insert this simple php codes
+```
+<?php
+phpinfo();
+```
+![php page displayed](./images/php.PNG)
 
 
 
