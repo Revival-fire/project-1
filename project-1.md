@@ -56,6 +56,54 @@ P-Php
 
 STEP 4 — CREATING A VIRTUAL HOST FOR YOUR WEBSITE USING APACHE
 
+First of all create a directory projectlamp
+
+`sudo mkdir var/www/projectlamp`
+
+Next, assign ownership of the directory with your current system user:
+
+ `sudo chown -R $USER:$USER /var/www/projectlamp`
+
+ open a file with this code 
+
+`sudo vi /etc/apache2/sites-available/projectlamp.conf`
+
+Then post the code below 
+
+```
+<VirtualHost *:80>
+    ServerName projectlamp
+    ServerAlias www.projectlamp 
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/projectlamp
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost> 
+```
+
+Enable the virtualhost with the code below
+
+`sudo a2ensite projectlamp`
+
+Disable the default website that comes installed with Apache with the code below
+
+`sudo a2dissite 000-default`
+
+Making sure your configuration file doesn’t contain syntax errors, run:
+
+`sudo apache2ctl configtest`
+
+Reload the web server  to effect the changes 
+
+`sudo systemctl reload apache2`
+
+Create an index.html file in that location so that we can test that the virtual host works as expected:
+```
+sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
+```
+
+STEP 5 — ENABLE PHP ON THE WEBSITE
+
 
 
 
