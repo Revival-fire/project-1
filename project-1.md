@@ -133,6 +133,7 @@ phpinfo();
 ```
 ![php page displayed](./images/php.PNG)
 
+## THE END
 
 
 
